@@ -1,0 +1,1 @@
+<?php echo "Vallée Villa Blanche — le serveur PHP fonctionne !"; ?>
