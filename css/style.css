@@ -1,0 +1,132 @@
+/* 01-Charte graphique */
+
+:root{
+  --blanc-villa:#F8F5EF;
+  --blanc-pur:#FFFFFF;
+  --vert-vallee:#3F5740;
+  --vert-sauge:#7E9471;
+  --or-sable:#C9A66B;
+  --anthracite:#2B2B28;
+  --gris-lin:#D8D3C8;
+  --serif:"Cormorant Garamond", Georgia, serif;
+  --sans:"Work Sans", system-ui, sans-serif;
+}
+
+/* 02-Global */
+*{
+    box-sizing: border-box;
+}
+body{
+    margin: 0;
+    font-family: var(--sans);
+    background: var(--blanc-villa);
+    color: var(--anthracite);
+    line-height: 1.6;
+}
+h1, h2, h3{
+    font-family: var(--serif);
+    color: var(--vert-vallee);
+}
+a{
+    color: var(--vert-vallee);
+}
+
+/* 03-En-tête */
+
+.entete{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--vert-vallee);
+    color: #fff;
+    padding: 16px 32px;
+}
+.entete strong{
+    font-family: var(--serif);
+    font-size: 22px;
+}
+.entete nav a{
+    color: #ede9e0;
+    text-decoration: none;
+    margin-left: 20px;
+}
+.entete nav a:hover{
+    color: var(--or-sable);
+}
+
+/* 04-Contenu */
+
+main{
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 32px;
+}
+
+/* 05-Bouton */
+
+.btn{
+    background: var(--or-sable);
+    color: #3a2f12;
+    border: 0;
+    padding: 12px 22px;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 500;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    transition: filter .2s;
+}
+.btn:hover{
+    filter: brightness(1.07);
+}
+
+/* 06-Grille */
+
+.grille{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap:24px
+}
+.villa{
+    background: var(--blanc-pur);
+    border: 1px solid var(--gris-lin);
+    border-radius: 14px;
+    overflow: hidden;
+    transition: transform .2s;
+}
+.villa:hover{
+    transform: translateY(-4px);
+}
+.villa .photo{
+    height: 160px;
+    background: var(--vert-sauge);
+}
+.villa .corps{
+    padding: 16px;
+}
+.villa h3{
+    margin: 4px 0;
+}
+.badge{
+    display: inline-block;
+    font-size: 12px;
+    padding: 3px 10px;
+    border-radius: 20px;
+    background: var(--vert-sauge);
+    color: #fff;
+}
+.prix{
+    color: var(--or-sable);
+    font-weight: 600;
+    font-size: 18px;
+}
+
+/* 07-Pied de page */
+.pied{
+    background: var(--vert-vallee);
+    color: #ede9e0;
+    text-align: center;
+    padding: 24px;
+    margin-top: 48px;
+}
