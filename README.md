@@ -12,7 +12,6 @@ Côté visiteurs : voir l'appartement proposé à la location, se créer un comp
 
 Côté famille : un espace privé pour gérer l'ensemble de des appartement, celui qu'on loue comme ceux qu'on garde pour nous. Les deux côtés lisent la même base de données, mais le public ne voit que ce qu'on choisit de montrer.
 
-Pour être honnête, tout n'est pas encore en place. 
 
 03 - Pourquoi ce projet
 
