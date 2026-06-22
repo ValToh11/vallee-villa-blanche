@@ -123,10 +123,34 @@ main{
 }
 
 /* 07-Pied de page */
+
 .pied{
     background: var(--vert-vallee);
     color: #ede9e0;
     text-align: center;
     padding: 24px;
     margin-top: 48px;
+}
+
+/* 08-Vedette */
+
+.vedette{
+  display:grid; 
+  grid-template-columns:1fr 1fr; 
+  gap:0;
+  background:var(--blanc-pur); 
+  border:1px solid var(--gris-lin);
+  border-radius:16px; 
+  overflow:hidden; 
+  margin-top:8px;
+}
+.vedette .photo{ 
+  background:var(--vert-sauge); 
+  min-height:300px; 
+}
+.vedette .infos{ 
+  padding:32px;
+}
+@media (max-width:700px){ 
+.vedette{ grid-template-columns:1fr; } 
 }
