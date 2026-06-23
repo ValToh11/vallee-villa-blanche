@@ -1,10 +1,10 @@
 01-Vallée Villa Blanche
 
-C'est le site de location d'appartement familiale, avec un intranet et des location uniquement disponible pour la famille. Et accessoirement c'est mon terrain d'entraînement pour apprendre à coder.
+C'est le site de location d'appartement familial, avec un intranet et des locations uniquement disponibles pour la famille. Et accessoirement c'est mon terrain d'entraînement pour apprendre à coder.
 
 En plus de ce que j'apprend en formation, j'essaye de construire correctement mon premier site internet.
 J'apprends en faisant, je casse des choses, je répare, je fais de mon mieux pour apprendre correctement
-Dans le fichier docs, je me suis amusé grace a l'ia pour me faire une feuille de route ainsi que de créer des cours sur les fondamentaux du code.
+Dans le fichier docs, je me suis amusé grâce à l'IA pour me faire une feuille de route ainsi que de créer des cours sur les fondamentaux du code.
 
 02 - Ce que fait le site
 
@@ -15,9 +15,9 @@ Côté famille : un espace privé pour gérer l'ensemble de des appartement, cel
 
 03 - Pourquoi ce projet
 
-je me suis engagé dans l'armée en 2016, ou j'ai pu apprendre énormément sur moi. J'ai réalisé quelque mission et sentinelle durant mon parcours avec entre temps pas mal de formation qui vont du stage chef d'équipe au soin avancé sur des blésé de guerre. en 2024, j'ai obtenu le concours des sous-officier de Gendarmerie, et en novembre 2024, j'ai commencé ma formation de sous officier. Malheureusement suite a une séance de sport je me suis gravement bléssé au dos (opération/ réeducation ++).
+je me suis engagé dans l'armée en 2016, ou j'ai pu apprendre énormément sur moi. J'ai réalisé quelque mission et sentinelle durant mon parcours avec entre temps pas mal de formation qui vont du stage chef d'équipe au soin avancé sur des blésé de guerre. en 2024, j'ai obtenu le concours des sous-officiers de Gendarmerie, et en novembre 2024, j'ai commencé ma formation de sous-officier. Malheureusement suite à une séance de sport je me suis gravement blessé au dos (opération / rééducation ++).
 
-J'ai beaucoup regardé les formation qu'il étais possible puis j'ai eu le declique. En effet, je suis un fan de jeu vidéo sur PC, et via des tuto j'apprenais a modifier des mode et a apprendre comment ils étaient fait et il m'est venu l'idée de prendre une formation de developpeur Web.
+J'ai beaucoup regardé les formation qu'il étais possible puis j'ai eu le declique. En effet, je suis un fan de jeux vidéo sur PC, et via des tutos j'apprenais à modifier des mods et à apprendre comment ils étaient faits, et il m'est venu l'idée de prendre une formation de développeur Web.
 
 L'armée m'a appris la résilience et a toujours retombé sur mes jambes et aujourd'hui grace a mon mental d'acier je suis plus que motivé a en faire mon métier!
 
@@ -50,7 +50,7 @@ Ce qu'il me reste :
 [ ] La sécurité, les mentions légales et le RGPD
 [ ] La mise en ligne
 
-J'avance étape par étape, et je mets cette liste à jour au fur et à mesure grace à Claude IA.
+J'avance étape par étape, et je mets cette liste à jour au fur et à mesure grâce à Claude IA.
 
 06 - Moi
 
