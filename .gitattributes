@@ -1,0 +1,5 @@
+# Forcer tous les fichiers .php à être comptés comme du PHP
+*.php linguist-language=PHP
+
+# Ne pas compter le support de cours dans les statistiques
+docs/** linguist-documentation
