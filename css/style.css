@@ -1,5 +1,8 @@
-/* 01-Charte graphique */
+/* =========================================================
+   Vallée Villa Blanche — feuille de style
+   ========================================================= */
 
+/* --- Charte : couleurs & polices --- */
 :root{
   --blanc-villa:#F8F5EF;
   --blanc-pur:#FFFFFF;
@@ -12,155 +15,98 @@
   --sans:"Work Sans", system-ui, sans-serif;
 }
 
-/* 02-Global */
-*{
-    box-sizing: border-box;
-}
+*{ box-sizing:border-box; }
+
 body{
-    margin: 0;
-    font-family: var(--sans);
-    background: var(--blanc-villa);
-    color: var(--anthracite);
-    line-height: 1.6;
+  margin:0;
+  font-family:var(--sans);
+  background:var(--blanc-villa);
+  color:var(--anthracite);
+  line-height:1.6;
 }
-h1, h2, h3{
-    font-family: var(--serif);
-    color: var(--vert-vallee);
-}
-a{
-    color: var(--vert-vallee);
-}
+h1, h2, h3{ font-family:var(--serif); color:var(--vert-vallee); }
+a{ color:var(--vert-vallee); }
 
-/* 03-En-tête */
-
+/* --- En-tête --- */
 .entete{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: var(--vert-vallee);
-    color: #fff;
-    padding: 16px 32px;
+  display:flex; justify-content:space-between; align-items:center;
+  background:var(--vert-vallee); color:#fff; padding:16px 32px;
 }
-.entete strong{
-    font-family: var(--serif);
-    font-size: 22px;
-}
-.entete nav a{
-    color: #ede9e0;
-    text-decoration: none;
-    margin-left: 20px;
-}
-.entete nav a:hover{
-    color: var(--or-sable);
-}
+.entete strong{ font-family:var(--serif); font-size:22px; }
+.entete nav a{ color:#EDE9E0; text-decoration:none; margin-left:20px; }
+.entete nav a:hover{ color:var(--or-sable); }
 
-/* 04-Contenu */
+/* --- Contenu --- */
+main{ max-width:1100px; margin:0 auto; padding:32px; }
 
-main{
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 32px;
-}
-
-/* 05-Bouton */
-
+/* --- Boutons --- */
 .btn{
-    background: var(--or-sable);
-    color: #3a2f12;
-    border: 0;
-    padding: 12px 22px;
-    border-radius: 8px;
-    font-size: 15px;
-    font-weight: 500;
-    cursor: pointer;
-    text-decoration: none;
-    display: inline-block;
-    transition: filter .2s;
+  background:var(--or-sable); color:#3a2f12; border:0;
+  padding:12px 22px; border-radius:8px; font-size:15px; font-weight:500;
+  cursor:pointer; text-decoration:none; display:inline-block;
+  transition:filter .2s;
 }
-.btn:hover{
-    filter: brightness(1.07);
+.btn:hover{ filter:brightness(1.07); }
+
+/* --- Section d'accroche (hero) --- */
+.hero{ text-align:center; padding:64px 24px; }
+.hero h1{ font-size:38px; margin:0 0 12px; }
+.hero p{ font-size:18px; color:var(--vert-sauge); margin:0 0 24px; }
+
+/* --- Villa vedette (accueil public) --- */
+.vedette{
+  display:grid; grid-template-columns:1fr 1fr; gap:0;
+  background:var(--blanc-pur); border:1px solid var(--gris-lin);
+  border-radius:16px; overflow:hidden; margin-top:8px;
 }
+.vedette .photo{
+  min-height:300px;
+  background:linear-gradient(135deg, var(--vert-sauge), var(--vert-vallee));
+}
+.vedette .infos{ padding:32px; }
+@media (max-width:700px){ .vedette{ grid-template-columns:1fr; } }
 
-/* 06-Grille */
-
+/* --- Villas : grille + cartes --- */
 .grille{
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    gap:24px
+  display:grid;
+  grid-template-columns:repeat(auto-fit, minmax(240px, 1fr));
+  gap:24px;
 }
 .villa{
-    background: var(--blanc-pur);
-    border: 1px solid var(--gris-lin);
-    border-radius: 14px;
-    overflow: hidden;
-    transition: transform .2s;
+  display:flex; flex-direction:column;
+  background:var(--blanc-pur);
+  border:1px solid var(--gris-lin);
+  border-radius:14px;
+  overflow:hidden;
+  transition:transform .2s, box-shadow .2s;
 }
-.villa:hover{
-    transform: translateY(-4px);
-}
+.villa:hover{ transform:translateY(-4px); box-shadow:0 10px 24px rgba(63,87,64,.12); }
 .villa .photo{
-    height: 160px;
-    background: var(--vert-sauge);
+  height:150px;
+  background:linear-gradient(135deg, var(--vert-sauge), var(--vert-vallee));
 }
 .villa .corps{
-    padding: 16px;
+  display:flex; flex-direction:column; flex:1;
+  padding:18px;
 }
-.villa h3{
-    margin: 4px 0;
-}
+.villa .badge{ align-self:flex-start; margin-bottom:10px; }
+.villa h3{ margin:0 0 6px; font-size:18px; line-height:1.3; min-height:2.6em; }
+.villa .meta{ color:#6b6f64; font-size:14px; margin:0 0 14px; min-height:4.8em; }
+.villa .tarif{ min-height:2.4em; margin-bottom:14px; }
+.villa .tarif .gratuit{ display:block; color:var(--vert-vallee); font-weight:600; }
+.villa .tarif .public{ color:#8b8f84; font-size:13px; }
+.villa .btn{ margin-top:auto; text-align:center; }
+
+/* --- Badge de statut & prix --- */
 .badge{
-    display: inline-block;
-    font-size: 12px;
-    padding: 3px 10px;
-    border-radius: 20px;
-    background: var(--vert-sauge);
-    color: #fff;
+  display:inline-block; font-size:12px; padding:3px 10px;
+  border-radius:20px; background:var(--vert-sauge); color:#fff;
 }
-.prix{
-    color: var(--or-sable);
-    font-weight: 600;
-    font-size: 18px;
-}
-
-/* 07-Pied de page */
-
-.pied{
-    background: var(--vert-vallee);
-    color: #ede9e0;
-    text-align: center;
-    padding: 24px;
-    margin-top: 48px;
-}
-
-/* 08-Vedette */
-
-.vedette{
-  display:grid; 
-  grid-template-columns:1fr 1fr; 
-  gap:0;
-  background:var(--blanc-pur); 
-  border:1px solid var(--gris-lin);
-  border-radius:16px; 
-  overflow:hidden; 
-  margin-top:8px;
-}
-.vedette .photo{ 
-  background:var(--vert-sauge); 
-  min-height:300px; 
-}
-.vedette .infos{ 
-  padding:32px;
-}
-@media (max-width:700px){ 
-.vedette{ grid-template-columns:1fr; } 
-}
-
-
-
-
-
-
-
-
-/* Badge "en location"  */
 .badge.location{ background:var(--or-sable); color:#3a2f12; }
+.prix{ color:var(--or-sable); font-weight:600; font-size:18px; }
+
+/* --- Pied de page --- */
+.pied{
+  background:var(--vert-vallee); color:#EDE9E0; text-align:center;
+  padding:24px; margin-top:48px;
+}
