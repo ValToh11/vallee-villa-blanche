@@ -154,3 +154,13 @@ main{
 @media (max-width:700px){ 
 .vedette{ grid-template-columns:1fr; } 
 }
+
+
+
+
+
+
+
+
+/* Badge "en location"  */
+.badge.location{ background:var(--or-sable); color:#3a2f12; }
