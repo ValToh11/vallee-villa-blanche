@@ -217,7 +217,11 @@ main {
   font-weight: 600;
   font-size: 18px;
 }
-
+.recap{ 
+  margin-top:20px; 
+  padding-top:20px; 
+  border-top:1px solid var(--gris-lin); 
+}
 /* --- Pied de page --- */
 .pied {
   background: var(--vert-vallee);

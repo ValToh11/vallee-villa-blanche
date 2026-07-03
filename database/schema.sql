@@ -16,19 +16,37 @@ CREATE TABLE villas (
   localisation  VARCHAR(120),
   capacite      INT,
   couchage      VARCHAR(255),
-  prix_nuit     DECIMAL(8,2),                 -- tarif public ; NULL pour les villas privées
+  prix_nuit     DECIMAL(8,2),
   image         VARCHAR(255),
   statut        ENUM('publie','prive') NOT NULL DEFAULT 'prive',
   date_creation DATETIME DEFAULT CURRENT_TIMESTAMP
 );
--- --- Table des clients ---
+
+-- --- Table des clients (inscription publique) ---
 CREATE TABLE clients (
   id            INT AUTO_INCREMENT PRIMARY KEY,
   prenom        VARCHAR(80) NOT NULL,
   nom           VARCHAR(80) NOT NULL,
   email         VARCHAR(180) NOT NULL UNIQUE,
+  telephone     VARCHAR(20),
   mot_de_passe  VARCHAR(255) NOT NULL,
   date_creation DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+
+-- --- Table des réservations ---
+CREATE TABLE reservations (
+  id              INT AUTO_INCREMENT PRIMARY KEY,
+  villa_id        INT NOT NULL,
+  client_id       INT NOT NULL,
+  date_arrivee    DATE NOT NULL,
+  date_depart     DATE NOT NULL,
+  nb_nuits        INT NOT NULL,
+  prix_total      DECIMAL(8,2) NOT NULL,
+  statut          ENUM('en_attente','confirmee','annulee') NOT NULL DEFAULT 'en_attente',
+  statut_paiement ENUM('en_attente','paye','echoue') NOT NULL DEFAULT 'en_attente',
+  date_creation   DATETIME DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (villa_id)  REFERENCES villas(id),
+  FOREIGN KEY (client_id) REFERENCES clients(id)
 );
 
 -- --- Villas de départ (les 4 lieux de la famille) ---

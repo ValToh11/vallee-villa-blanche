@@ -10,56 +10,84 @@ if (!isset($_SESSION["client_id"])) {
 require "includes/db.php";
 
 $clientId = $_SESSION["client_id"];
-$erreurs  = [];
-$succes   = false;
 
-// ---- Traitement du formulaire de modification ----
+// Messages séparés pour chaque formulaire
+$erreurs = [];      $succes = false;      // infos
+$erreursMdp = [];   $succesMdp = false;   // mot de passe
+
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    $prenom    = trim($_POST["prenom"] ?? "");
-    $nom       = trim($_POST["nom"] ?? "");
-    $email     = trim($_POST["email"] ?? "");
-    $telephone = trim($_POST["telephone"] ?? "");
+    $action = $_POST["form"] ?? "";
 
-    // Validation côté serveur
-    if ($prenom === "" || $nom === "") {
-        $erreurs[] = "Le prénom et le nom sont obligatoires.";
-    }
-    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        $erreurs[] = "L'adresse email n'est pas valide.";
-    }
-    if ($telephone === "") {
-        $erreurs[] = "Le numéro de téléphone est obligatoire.";
-    }
+    // ================= FORMULAIRE 1 : INFORMATIONS =================
+    if ($action === "infos") {
+        $prenom    = trim($_POST["prenom"] ?? "");
+        $nom       = trim($_POST["nom"] ?? "");
+        $email     = trim($_POST["email"] ?? "");
+        $telephone = trim($_POST["telephone"] ?? "");
 
-    // L'email doit être unique... sauf s'il appartient déjà à CE compte
-    if (!$erreurs) {
-        $req = $pdo->prepare("SELECT id FROM clients WHERE email = ? AND id != ?");
-        $req->execute([$email, $clientId]);
-        if ($req->fetch()) {
-            $erreurs[] = "Cette adresse email est déjà utilisée par un autre compte.";
+        if ($prenom === "" || $nom === "") {
+            $erreurs[] = "Le prénom et le nom sont obligatoires.";
+        }
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            $erreurs[] = "L'adresse email n'est pas valide.";
+        }
+        if ($telephone === "") {
+            $erreurs[] = "Le numéro de téléphone est obligatoire.";
+        }
+        if (!$erreurs) {
+            $req = $pdo->prepare("SELECT id FROM clients WHERE email = ? AND id != ?");
+            $req->execute([$email, $clientId]);
+            if ($req->fetch()) {
+                $erreurs[] = "Cette adresse email est déjà utilisée par un autre compte.";
+            }
+        }
+        if (!$erreurs) {
+            $req = $pdo->prepare(
+                "UPDATE clients SET prenom = ?, nom = ?, email = ?, telephone = ? WHERE id = ?"
+            );
+            $req->execute([$prenom, $nom, $email, $telephone, $clientId]);
+            $_SESSION["client_prenom"] = $prenom;
+            $succes = true;
         }
     }
 
-    // Tout est bon : on met à jour
-    if (!$erreurs) {
-        $req = $pdo->prepare(
-            "UPDATE clients SET prenom = ?, nom = ?, email = ?, telephone = ? WHERE id = ?"
-        );
-        $req->execute([$prenom, $nom, $email, $telephone, $clientId]);
-        $_SESSION["client_prenom"] = $prenom;   // le menu se met à jour aussitôt
-        $succes = true;
+    // ================= FORMULAIRE 2 : MOT DE PASSE =================
+    if ($action === "motdepasse") {
+        $actuel  = $_POST["mdp_actuel"] ?? "";
+        $nouveau = $_POST["mdp_nouveau"] ?? "";
+        $confirm = $_POST["mdp_confirm"] ?? "";
+
+        // On récupère l'empreinte actuelle pour la vérifier
+        $req = $pdo->prepare("SELECT mot_de_passe FROM clients WHERE id = ?");
+        $req->execute([$clientId]);
+        $ligne = $req->fetch();
+
+        if (!password_verify($actuel, $ligne["mot_de_passe"])) {
+            $erreursMdp[] = "Le mot de passe actuel est incorrect.";
+        }
+        if (strlen($nouveau) < 8) {
+            $erreursMdp[] = "Le nouveau mot de passe doit contenir au moins 8 caractères.";
+        }
+        if ($nouveau !== $confirm) {
+            $erreursMdp[] = "Les deux nouveaux mots de passe ne correspondent pas.";
+        }
+        if (!$erreursMdp) {
+            $hash = password_hash($nouveau, PASSWORD_DEFAULT);
+            $req = $pdo->prepare("UPDATE clients SET mot_de_passe = ? WHERE id = ?");
+            $req->execute([$hash, $clientId]);
+            $succesMdp = true;
+        }
     }
 }
 
-// ---- On charge les infos à jour pour pré-remplir le formulaire ----
+// ---- Infos à jour pour pré-remplir le formulaire ----
 $req = $pdo->prepare(
     "SELECT prenom, nom, email, telephone, date_creation FROM clients WHERE id = ?"
 );
 $req->execute([$clientId]);
 $client = $req->fetch();
 
-// En cas d'erreur, on réaffiche ce que l'utilisateur venait de taper
-if ($erreurs) {
+if ($erreurs) {   // en cas d'erreur sur les infos, on réaffiche la saisie
     $client["prenom"]    = $prenom;
     $client["nom"]       = $nom;
     $client["email"]     = $email;
@@ -70,18 +98,19 @@ include "includes/header.php";
 ?>
 
   <main>
+
     <div class="form-card">
-      <h1>Mon compte</h1>
+      <h1>Mes informations</h1>
 
       <?php if ($succes): ?>
         <p class="succes">Vos informations ont bien été mises à jour.</p>
       <?php endif; ?>
-
       <?php foreach ($erreurs as $e): ?>
         <p class="erreur"><?= htmlspecialchars($e) ?></p>
       <?php endforeach; ?>
 
       <form method="post">
+        <input type="hidden" name="form" value="infos">
         <label>Prénom
           <input type="text" name="prenom" value="<?= htmlspecialchars($client["prenom"]) ?>" required>
         </label>
@@ -99,6 +128,32 @@ include "includes/header.php";
 
       <p class="form-lien">Membre depuis le <?= htmlspecialchars(date("d/m/Y", strtotime($client["date_creation"]))) ?></p>
     </div>
+
+    <div class="form-card" style="margin-top:28px">
+      <h1>Changer mon mot de passe</h1>
+
+      <?php if ($succesMdp): ?>
+        <p class="succes">Votre mot de passe a bien été modifié.</p>
+      <?php endif; ?>
+      <?php foreach ($erreursMdp as $e): ?>
+        <p class="erreur"><?= htmlspecialchars($e) ?></p>
+      <?php endforeach; ?>
+
+      <form method="post">
+        <input type="hidden" name="form" value="motdepasse">
+        <label>Mot de passe actuel
+          <input type="password" name="mdp_actuel" required>
+        </label>
+        <label>Nouveau mot de passe
+          <input type="password" name="mdp_nouveau" required minlength="8">
+        </label>
+        <label>Confirmer le nouveau mot de passe
+          <input type="password" name="mdp_confirm" required>
+        </label>
+        <button type="submit" class="btn">Changer mon mot de passe</button>
+      </form>
+    </div>
+
   </main>
 
 <?php include "includes/footer.php"; ?>

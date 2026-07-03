@@ -40,7 +40,7 @@ include "includes/header.php";
         <p><?= htmlspecialchars($villa['description']) ?></p>
         <p class="meta"><?= (int) $villa['capacite'] ?> voyageurs · <?= htmlspecialchars($villa['couchage']) ?></p>
         <p class="prix"><?= number_format($villa['prix_nuit'], 0, ',', ' ') ?> € <span style="font-weight:400;font-size:14px;color:var(--anthracite)">/ nuit</span></p>
-        <a href="#" class="btn">Réserver ce séjour</a>
+        <a href="reservation.php" class="btn">Réserver ce séjour</a>
       </div>
     </article>
     <?php else: ?>
