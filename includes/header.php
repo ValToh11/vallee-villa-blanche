@@ -1,3 +1,4 @@
+<?php if (session_status() === PHP_SESSION_NONE) session_start(); ?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -13,8 +14,13 @@
     <strong>Vallée Villa Blanche</strong>
     <nav>
       <a href="index.php">Accueil</a>
-      <a href="catalogue.php">Notre appartement</a>
-      <a href="connexion.php">Connexion</a>
-      <a href="inscription.php">Inscription</a>
+      <?php if (isset($_SESSION["client_id"])): ?>
+        <span class="salut">Bonjour <?= htmlspecialchars($_SESSION["client_prenom"]) ?></span>
+        <a href="mon-compte.php">Mon compte</a>
+        <a href="deconnexion.php">Déconnexion</a>
+      <?php else: ?>
+        <a href="connexion.php">Connexion</a>
+        <a href="inscription.php">Inscription</a>
+      <?php endif; ?>
     </nav>
   </header>

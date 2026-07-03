@@ -3,168 +3,284 @@
    ========================================================= */
 
 /* --- Charte : couleurs & polices --- */
-:root{
-  --blanc-villa:#F8F5EF;
-  --blanc-pur:#FFFFFF;
-  --vert-vallee:#3F5740;
-  --vert-sauge:#7E9471;
-  --or-sable:#C9A66B;
-  --anthracite:#2B2B28;
-  --gris-lin:#D8D3C8;
-  --serif:"Cormorant Garamond", Georgia, serif;
-  --sans:"Work Sans", system-ui, sans-serif;
+:root {
+  --blanc-villa: #f8f5ef;
+  --blanc-pur: #ffffff;
+  --vert-vallee: #3f5740;
+  --vert-sauge: #7e9471;
+  --or-sable: #c9a66b;
+  --anthracite: #2b2b28;
+  --gris-lin: #d8d3c8;
+  --serif: "Cormorant Garamond", Georgia, serif;
+  --sans: "Work Sans", system-ui, sans-serif;
 }
 
-*{ box-sizing:border-box; }
-
-body{
-  margin:0;
-  font-family:var(--sans);
-  background:var(--blanc-villa);
-  color:var(--anthracite);
-  line-height:1.6;
+* {
+  box-sizing: border-box;
 }
-h1, h2, h3{ font-family:var(--serif); color:var(--vert-vallee); }
-a{ color:var(--vert-vallee); }
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: var(--sans);
+  background: var(--blanc-villa);
+  color: var(--anthracite);
+  line-height: 1.6;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+h1,
+h2,
+h3 {
+  font-family: var(--serif);
+  color: var(--vert-vallee);
+}
+a {
+  color: var(--vert-vallee);
+}
 
 /* --- En-tête --- */
-.entete{
-  display:flex; justify-content:space-between; align-items:center;
-  background:var(--vert-vallee); color:#fff; padding:16px 32px;
+.entete {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--vert-vallee);
+  color: #fff;
+  padding: 16px 32px;
 }
-.entete strong{ font-family:var(--serif); font-size:22px; }
-.entete nav a{ color:#EDE9E0; text-decoration:none; margin-left:20px; }
-.entete nav a:hover{ color:var(--or-sable); }
+.entete strong {
+  font-family: var(--serif);
+  font-size: 22px;
+}
+.entete nav a {
+  color: #ede9e0;
+  text-decoration: none;
+  margin-left: 20px;
+}
+.entete nav a:hover {
+  color: var(--or-sable);
+}
+.entete .salut {
+  color: #ede9e0;
+  margin-left: 20px;
+  font-size: 14px;
+}
 
 /* --- Contenu --- */
-main{ max-width:1100px; margin:0 auto; padding:32px; }
+main {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 32px;
+  flex: 1;
+}
 
 /* --- Boutons --- */
-.btn{
-  background:var(--or-sable); color:#3a2f12; border:0;
-  padding:12px 22px; border-radius:8px; font-size:15px; font-weight:500;
-  cursor:pointer; text-decoration:none; display:inline-block;
-  transition:filter .2s;
+.btn {
+  background: var(--or-sable);
+  color: #3a2f12;
+  border: 0;
+  padding: 12px 22px;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+  transition: filter 0.2s;
 }
-.btn:hover{ filter:brightness(1.07); }
+.btn:hover {
+  filter: brightness(1.07);
+}
 
 /* --- Section d'accroche (hero) --- */
-.hero{ text-align:center; padding:64px 24px; }
-.hero h1{ font-size:38px; margin:0 0 12px; }
-.hero p{ font-size:18px; color:var(--vert-sauge); margin:0 0 24px; }
+.hero {
+  text-align: center;
+  padding: 64px 24px;
+}
+.hero h1 {
+  font-size: 38px;
+  margin: 0 0 12px;
+}
+.hero p {
+  font-size: 18px;
+  color: var(--vert-sauge);
+  margin: 0 0 24px;
+}
 
 /* --- Villa vedette (accueil public) --- */
-.vedette{
-  display:grid; grid-template-columns:1fr 1fr; gap:0;
-  background:var(--blanc-pur); border:1px solid var(--gris-lin);
-  border-radius:16px; overflow:hidden; margin-top:8px;
+.vedette {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  background: var(--blanc-pur);
+  border: 1px solid var(--gris-lin);
+  border-radius: 16px;
+  overflow: hidden;
+  margin-top: 8px;
 }
-.vedette .photo{
-  min-height:300px;
-  background:linear-gradient(135deg, var(--vert-sauge), var(--vert-vallee));
+.vedette .photo {
+  min-height: 300px;
+  background: linear-gradient(135deg, var(--vert-sauge), var(--vert-vallee));
 }
-.vedette .infos{ padding:32px; }
-@media (max-width:700px){ .vedette{ grid-template-columns:1fr; } }
+.vedette .infos {
+  padding: 32px;
+}
+@media (max-width: 700px) {
+  .vedette {
+    grid-template-columns: 1fr;
+  }
+}
 
 /* --- Villas : grille + cartes --- */
-.grille{
-  display:grid;
-  grid-template-columns:repeat(auto-fit, minmax(240px, 1fr));
-  gap:24px;
+.grille {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 24px;
 }
-.villa{
-  display:flex; flex-direction:column;
-  background:var(--blanc-pur);
-  border:1px solid var(--gris-lin);
-  border-radius:14px;
-  overflow:hidden;
-  transition:transform .2s, box-shadow .2s;
+.villa {
+  display: flex;
+  flex-direction: column;
+  background: var(--blanc-pur);
+  border: 1px solid var(--gris-lin);
+  border-radius: 14px;
+  overflow: hidden;
+  transition:
+    transform 0.2s,
+    box-shadow 0.2s;
 }
-.villa:hover{ transform:translateY(-4px); box-shadow:0 10px 24px rgba(63,87,64,.12); }
-.villa .photo{
-  height:150px;
-  background:linear-gradient(135deg, var(--vert-sauge), var(--vert-vallee));
+.villa:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 24px rgba(63, 87, 64, 0.12);
 }
-.villa .corps{
-  display:flex; flex-direction:column; flex:1;
-  padding:18px;
+.villa .photo {
+  height: 150px;
+  background: linear-gradient(135deg, var(--vert-sauge), var(--vert-vallee));
 }
-.villa .badge{ align-self:flex-start; margin-bottom:10px; }
-.villa h3{ margin:0 0 6px; font-size:18px; line-height:1.3; min-height:2.6em; }
-.villa .meta{ color:#6b6f64; font-size:14px; margin:0 0 14px; min-height:4.8em; }
-.villa .tarif{ min-height:2.4em; margin-bottom:14px; }
-.villa .tarif .gratuit{ display:block; color:var(--vert-vallee); font-weight:600; }
-.villa .tarif .public{ color:#8b8f84; font-size:13px; }
-.villa .btn{ margin-top:auto; text-align:center; }
+.villa .corps {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding: 18px;
+}
+.villa .badge {
+  align-self: flex-start;
+  margin-bottom: 10px;
+}
+.villa h3 {
+  margin: 0 0 6px;
+  font-size: 18px;
+  line-height: 1.3;
+  min-height: 2.6em;
+}
+.villa .meta {
+  color: #6b6f64;
+  font-size: 14px;
+  margin: 0 0 14px;
+  min-height: 4.8em;
+}
+.villa .tarif {
+  min-height: 2.4em;
+  margin-bottom: 14px;
+}
+.villa .tarif .gratuit {
+  display: block;
+  color: var(--vert-vallee);
+  font-weight: 600;
+}
+.villa .tarif .public {
+  color: #8b8f84;
+  font-size: 13px;
+}
+.villa .btn {
+  margin-top: auto;
+  text-align: center;
+}
 
 /* --- Badge de statut & prix --- */
-.badge{
-  display:inline-block; font-size:12px; padding:3px 10px;
-  border-radius:20px; background:var(--vert-sauge); color:#fff;
+.badge {
+  display: inline-block;
+  font-size: 12px;
+  padding: 3px 10px;
+  border-radius: 20px;
+  background: var(--vert-sauge);
+  color: #fff;
 }
-.badge.location{ background:var(--or-sable); color:#3a2f12; }
-.prix{ color:var(--or-sable); font-weight:600; font-size:18px; }
+.badge.location {
+  background: var(--or-sable);
+  color: #3a2f12;
+}
+.prix {
+  color: var(--or-sable);
+  font-weight: 600;
+  font-size: 18px;
+}
 
 /* --- Pied de page --- */
-.pied{
-  background:var(--vert-vallee); color:#EDE9E0; text-align:center;
-  padding:24px; margin-top:48px;
+.pied {
+  background: var(--vert-vallee);
+  color: #ede9e0;
+  text-align: center;
+  padding: 24px;
+  margin-top: 48px;
 }
 
 /* --- Formulaires --- */
-.form-card{
-  max-width:440px; 
-  margin:0 auto;
-  background:var(--blanc-pur); 
-  border:1px solid var(--gris-lin);
-  border-radius:14px; 
-  padding:28px;
+.form-card {
+  max-width: 440px;
+  margin: 0 auto;
+  background: var(--blanc-pur);
+  border: 1px solid var(--gris-lin);
+  border-radius: 14px;
+  padding: 28px;
 }
-.form-card h1{ 
-  margin-top:0; 
+.form-card h1 {
+  margin-top: 0;
 }
-.form-card label{ 
-  display:block; 
-  margin-bottom:14px; 
-  font-size:14px; 
-  color:#555; 
+.form-card label {
+  display: block;
+  margin-bottom: 14px;
+  font-size: 14px;
+  color: #555;
 }
-.form-card input{
-  display:block; 
-  width:100%; 
-  margin-top:5px; 
-  padding:10px 12px;
-  border:1px solid var(--gris-lin); 
-  border-radius:8px; 
-  font-size:15px;
-  font-family:inherit;
+.form-card input {
+  display: block;
+  width: 100%;
+  margin-top: 5px;
+  padding: 10px 12px;
+  border: 1px solid var(--gris-lin);
+  border-radius: 8px;
+  font-size: 15px;
+  font-family: inherit;
 }
-.form-card input:focus{ 
-  outline:2px solid var(--vert-sauge); 
-  border-color:transparent; 
+.form-card input:focus {
+  outline: 2px solid var(--vert-sauge);
+  border-color: transparent;
 }
-.form-card .btn{ 
-  width:100%; 
-  margin-top:8px; 
-  text-align:center; 
+.form-card .btn {
+  width: 100%;
+  margin-top: 8px;
+  text-align: center;
 }
-.form-lien{ 
-  text-align:center; 
-  font-size:14px; 
-  margin-top:16px; 
+.form-lien {
+  text-align: center;
+  font-size: 14px;
+  margin-top: 16px;
 }
-.erreur{ 
-  background:#F7ECE7; 
-  border:1px solid #E8C9BB; 
-  color:#9A4A29; 
-  padding:10px 14px; 
-  border-radius:8px; 
-  font-size:14px; 
+.erreur {
+  background: #f7ece7;
+  border: 1px solid #e8c9bb;
+  color: #9a4a29;
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-size: 14px;
 }
-.succes{ 
-  background:#EEF1E9; 
-  border:1px solid #C7D3B5; 
-  color:#3F5740; 
-  padding:10px 14px; 
-  border-radius:8px; 
+.succes {
+  background: #eef1e9;
+  border: 1px solid #c7d3b5;
+  color: #3f5740;
+  padding: 10px 14px;
+  border-radius: 8px;
 }
