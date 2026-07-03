@@ -21,6 +21,15 @@ CREATE TABLE villas (
   statut        ENUM('publie','prive') NOT NULL DEFAULT 'prive',
   date_creation DATETIME DEFAULT CURRENT_TIMESTAMP
 );
+-- --- Table des clients ---
+CREATE TABLE clients (
+  id            INT AUTO_INCREMENT PRIMARY KEY,
+  prenom        VARCHAR(80) NOT NULL,
+  nom           VARCHAR(80) NOT NULL,
+  email         VARCHAR(180) NOT NULL UNIQUE,
+  mot_de_passe  VARCHAR(255) NOT NULL,
+  date_creation DATETIME DEFAULT CURRENT_TIMESTAMP
+);
 
 -- --- Villas de départ (les 4 lieux de la famille) ---
 INSERT INTO villas (nom, description, localisation, capacite, couchage, prix_nuit, statut) VALUES

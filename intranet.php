@@ -1,5 +1,3 @@
-<?php include "includes/header.php"; ?>
-
 <?php
 require "includes/db.php";
 $villas = $pdo->query("SELECT * FROM villas ORDER BY statut = 'publie' DESC, nom")->fetchAll();

@@ -15,5 +15,6 @@
       <a href="index.php">Accueil</a>
       <a href="catalogue.php">Notre appartement</a>
       <a href="connexion.php">Connexion</a>
+      <a href="inscription.php">Inscription</a>
     </nav>
   </header>
