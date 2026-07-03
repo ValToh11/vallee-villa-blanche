@@ -217,10 +217,150 @@ main {
   font-weight: 600;
   font-size: 18px;
 }
-.recap{ 
-  margin-top:20px; 
-  padding-top:20px; 
-  border-top:1px solid var(--gris-lin); 
+.recap {
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid var(--gris-lin);
+}
+/* --- Page de réservation --- */
+.reservation-layout {
+  max-width: 520px;
+  margin: 0 auto;
+  display: grid;
+  gap: 24px;
+}
+.reservation-layout .form-card {
+  max-width: none;
+}
+.voyageurs {
+  display: flex;
+  gap: 16px;
+  margin: 18px 0;
+}
+.stepper {
+  flex: 1;
+}
+.stepper > span {
+  display: block;
+  font-size: 14px;
+  color: #555;
+  margin-bottom: 6px;
+}
+.stepper-ctrl {
+  display: flex;
+  align-items: center;
+  border: 1px solid var(--gris-lin);
+  border-radius: 8px;
+  overflow: hidden;
+}
+.stepper-ctrl button {
+  width: 42px;
+  height: 42px;
+  border: 0;
+  background: var(--blanc-villa);
+  font-size: 20px;
+  cursor: pointer;
+  color: var(--vert-vallee);
+}
+.stepper-ctrl button:hover {
+  background: var(--gris-lin);
+}
+.stepper-ctrl input {
+  flex: 1;
+  text-align: center;
+  border: 0;
+  background: #fff;
+  font-size: 16px;
+  width: 40px;
+  font-family: inherit;
+}
+.prix-live {
+  margin: 14px 0;
+  font-size: 17px;
+  color: var(--vert-vallee);
+  min-height: 24px;
+}
+.recap-card {
+  border-color: var(--or-sable);
+}
+
+/* --- Liste des réservations --- */
+.resa-item {
+  border: 1px solid var(--gris-lin);
+  border-radius: 10px;
+  padding: 14px 16px;
+  margin-bottom: 12px;
+}
+.resa-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 6px;
+}
+.badge-statut {
+  font-size: 12px;
+  padding: 3px 10px;
+  border-radius: 20px;
+  white-space: nowrap;
+}
+.statut-en_attente {
+  background: #f3eedf;
+  color: #8a6a1e;
+}
+.statut-confirmee {
+  background: #eef1e9;
+  color: #3f5740;
+}
+.statut-annulee {
+  background: #f1eeec;
+  color: #9a4a29;
+}
+.resa-item .prix {
+  font-size: 16px;
+  margin: 0;
+}
+.btn-annuler {
+  background: none;
+  border: 1px solid #e8c9bb;
+  color: #9a4a29;
+  padding: 6px 14px;
+  border-radius: 8px;
+  font-size: 14px;
+  cursor: pointer;
+  margin-top: 6px;
+  font-family: inherit;
+}
+.btn-annuler:hover {
+  background: #f7ece7;
+}
+.resa-limite {
+  font-size: 13px;
+  color: #8b8f84;
+  margin: 6px 0 0;
+}
+/* --- Onglets espace client --- */
+.tabs-compte {
+  max-width: 440px;
+  margin: 0 auto 20px;
+  display: flex;
+  gap: 8px;
+  border-bottom: 1px solid var(--gris-lin);
+}
+.tabs-compte a {
+  padding: 10px 18px;
+  text-decoration: none;
+  color: #888;
+  font-weight: 500;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1px;
+}
+.tabs-compte a.actif {
+  color: var(--vert-vallee);
+  border-bottom-color: var(--or-sable);
+}
+.tabs-compte a:hover {
+  color: var(--vert-vallee);
 }
 /* --- Pied de page --- */
 .pied {

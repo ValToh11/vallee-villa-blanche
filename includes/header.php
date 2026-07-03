@@ -16,7 +16,7 @@
       <a href="index.php">Accueil</a>
       <?php if (isset($_SESSION["client_id"])): ?>
         <span class="salut">Bonjour <?= htmlspecialchars($_SESSION["client_prenom"]) ?></span>
-        <a href="mon-compte.php">Mon compte</a>
+        <a href="profil.php">Mon compte</a>
         <a href="deconnexion.php">Déconnexion</a>
       <?php else: ?>
         <a href="connexion.php">Connexion</a>

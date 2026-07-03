@@ -1,24 +1,18 @@
 <?php
 session_start();
-
-// ---- LE CADENAS : page réservée aux clients connectés ----
 if (!isset($_SESSION["client_id"])) {
     header("Location: connexion.php");
     exit;
 }
-
 require "includes/db.php";
 
 $clientId = $_SESSION["client_id"];
-
-// Messages séparés pour chaque formulaire
-$erreurs = [];      $succes = false;      // infos
-$erreursMdp = [];   $succesMdp = false;   // mot de passe
+$erreurs = [];      $succes = false;
+$erreursMdp = [];   $succesMdp = false;
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $action = $_POST["form"] ?? "";
 
-    // ================= FORMULAIRE 1 : INFORMATIONS =================
     if ($action === "infos") {
         $prenom    = trim($_POST["prenom"] ?? "");
         $nom       = trim($_POST["nom"] ?? "");
@@ -51,13 +45,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         }
     }
 
-    // ================= FORMULAIRE 2 : MOT DE PASSE =================
     if ($action === "motdepasse") {
         $actuel  = $_POST["mdp_actuel"] ?? "";
         $nouveau = $_POST["mdp_nouveau"] ?? "";
         $confirm = $_POST["mdp_confirm"] ?? "";
 
-        // On récupère l'empreinte actuelle pour la vérifier
         $req = $pdo->prepare("SELECT mot_de_passe FROM clients WHERE id = ?");
         $req->execute([$clientId]);
         $ligne = $req->fetch();
@@ -80,35 +72,30 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     }
 }
 
-// ---- Infos à jour pour pré-remplir le formulaire ----
-$req = $pdo->prepare(
-    "SELECT prenom, nom, email, telephone, date_creation FROM clients WHERE id = ?"
-);
+$req = $pdo->prepare("SELECT prenom, nom, email, telephone, date_creation FROM clients WHERE id = ?");
 $req->execute([$clientId]);
 $client = $req->fetch();
 
-if ($erreurs) {   // en cas d'erreur sur les infos, on réaffiche la saisie
-    $client["prenom"]    = $prenom;
-    $client["nom"]       = $nom;
-    $client["email"]     = $email;
-    $client["telephone"] = $telephone;
+if ($erreurs) {
+    $client["prenom"] = $prenom; $client["nom"] = $nom;
+    $client["email"] = $email;   $client["telephone"] = $telephone;
 }
 
+$pageActive = "profil";
 include "includes/header.php";
 ?>
 
   <main>
+    <?php include "includes/menu-compte.php"; ?>
 
     <div class="form-card">
       <h1>Mes informations</h1>
-
       <?php if ($succes): ?>
         <p class="succes">Vos informations ont bien été mises à jour.</p>
       <?php endif; ?>
       <?php foreach ($erreurs as $e): ?>
         <p class="erreur"><?= htmlspecialchars($e) ?></p>
       <?php endforeach; ?>
-
       <form method="post">
         <input type="hidden" name="form" value="infos">
         <label>Prénom
@@ -125,20 +112,17 @@ include "includes/header.php";
         </label>
         <button type="submit" class="btn">Enregistrer les modifications</button>
       </form>
-
       <p class="form-lien">Membre depuis le <?= htmlspecialchars(date("d/m/Y", strtotime($client["date_creation"]))) ?></p>
     </div>
 
     <div class="form-card" style="margin-top:28px">
       <h1>Changer mon mot de passe</h1>
-
       <?php if ($succesMdp): ?>
         <p class="succes">Votre mot de passe a bien été modifié.</p>
       <?php endif; ?>
       <?php foreach ($erreursMdp as $e): ?>
         <p class="erreur"><?= htmlspecialchars($e) ?></p>
       <?php endforeach; ?>
-
       <form method="post">
         <input type="hidden" name="form" value="motdepasse">
         <label>Mot de passe actuel
