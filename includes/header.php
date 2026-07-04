@@ -21,7 +21,7 @@
       <?php elseif (isset($_SESSION["famille_id"])): ?>
         <span class="salut">Famille · <?= htmlspecialchars($_SESSION["famille_prenom"]) ?></span>
         <a href="intranet.php">Les villas</a>
-        <a href="reservations-famille.php">Réservations</a>
+        <a href="planning-famille.php">Réservations</a>
         <a href="profil-famille.php">Mon profil</a>
         <a href="deconnexion-famille.php">Déconnexion</a>
       <?php else: ?>

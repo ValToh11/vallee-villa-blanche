@@ -363,32 +363,60 @@ main {
   color: var(--vert-vallee);
 }
 
-/* --- Planning famille : carte + calendrier côte à côte --- */
-.planning-main{ max-width:900px; margin:0 auto; }
-    .villa-row{
-      display:grid;
-      grid-template-columns: minmax(0, 1fr) 320px;  /* carte | calendrier fixe */
-      gap:16px;
-      align-items:start;
-      margin-bottom:24px;
-    }
-    .villa-row .creneaux-card{ max-width:none; margin:0; }
-    .calendrier-inline{ pointer-events:none; }
-    .calendrier-inline .flatpickr-calendar.inline{
-      box-shadow:none;
-      border:1px solid var(--gris-lin);
-      border-radius:12px;
-      margin:0;
-    }
-    .flatpickr-day.jour-occupe,
-    .flatpickr-day.jour-occupe:hover{
-      background:#EDE9E0; color:#b0aca1; text-decoration:line-through;
-    }
-    @media (max-width: 780px){
-      .villa-row{ grid-template-columns: 1fr; }
-      .calendrier-inline{ justify-self:start; }
-    }
-    
+/* --- Planning famille (page planning-famille.php uniquement) --- */
+.planning-main {
+  max-width: 900px;
+  margin: 0 auto;
+}
+.planning-main .villa-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 320px;
+  gap: 16px;
+  align-items: start;
+  margin-bottom: 24px;
+}
+.planning-main .creneaux-card {
+  max-width: none;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+.planning-main .creneaux-card h2 {
+  margin-top: 0;
+  flex: 0 0 auto;
+}
+.planning-main .creneaux-scroll {
+  flex: 1 1 auto;
+  overflow-y: auto;
+  padding-right: 6px;
+}
+.planning-main .creneaux-scroll .resa-item:last-child {
+  margin-bottom: 0;
+}
+
+.planning-main .calendrier-inline .flatpickr-day {
+  pointer-events: none;
+}
+.planning-main .calendrier-inline .flatpickr-calendar.inline {
+  box-shadow: none;
+  border: 1px solid var(--gris-lin);
+  border-radius: 12px;
+  margin: 0;
+}
+.planning-main .flatpickr-day.jour-occupe,
+.planning-main .flatpickr-day.jour-occupe:hover {
+  background: #ede9e0;
+  color: #b0aca1;
+  text-decoration: line-through;
+}
+
+@media (max-width: 780px) {
+  .planning-main .villa-row {
+    grid-template-columns: 1fr;
+  }
+}
+
 /* --- Pied de page --- */
 .pied {
   background: var(--vert-vallee);

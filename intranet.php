@@ -36,8 +36,8 @@ include "includes/header.php";
                 <span class="public">Au public : <?= number_format($villa['prix_nuit'], 0, ',', ' ') ?> € / nuit</span>
               <?php endif; ?>
             </div>
-            <a href="reservation-famille.php?villa=<?= (int) $villa['id'] ?>" class="btn">Réserver</a>
-          </div>
+            <a href="reserver-famille.php?villa=<?= (int) $villa['id'] ?>" class="btn">Réserver</a>
+            </div>
         </article>
       <?php endforeach; ?>
 
