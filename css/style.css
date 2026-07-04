@@ -109,6 +109,11 @@ main {
   color: var(--vert-sauge);
   margin: 0 0 24px;
 }
+.entete .lien-famille{
+  border:1px solid var(--or-sable);
+  border-radius:20px;
+  padding:4px 14px;
+}
 
 /* --- Villa vedette (accueil public) --- */
 .vedette {

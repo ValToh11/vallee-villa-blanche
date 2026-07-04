@@ -27,6 +27,7 @@
       <?php else: ?>
         <a href="connexion.php">Connexion</a>
         <a href="inscription.php">Inscription</a>
+        <a href="connexion-famille.php" class="lien-famille">Espace famille</a>
       <?php endif; ?>
     </nav>
   </header>
