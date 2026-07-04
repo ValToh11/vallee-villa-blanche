@@ -18,6 +18,12 @@
         <span class="salut">Bonjour <?= htmlspecialchars($_SESSION["client_prenom"]) ?></span>
         <a href="profil.php">Mon compte</a>
         <a href="deconnexion.php">Déconnexion</a>
+      <?php elseif (isset($_SESSION["famille_id"])): ?>
+        <span class="salut">Famille · <?= htmlspecialchars($_SESSION["famille_prenom"]) ?></span>
+        <a href="intranet.php">Les villas</a>
+        <a href="reservations-famille.php">Réservations</a>
+        <a href="profil-famille.php">Mon profil</a>
+        <a href="deconnexion-famille.php">Déconnexion</a>
       <?php else: ?>
         <a href="connexion.php">Connexion</a>
         <a href="inscription.php">Inscription</a>

@@ -1,4 +1,12 @@
 <?php
+session_start();
+
+// ---- Cadenas : espace réservé aux membres de la famille connectés ----
+if (!isset($_SESSION["famille_id"])) {
+    header("Location: connexion-famille.php");
+    exit;
+}
+
 require "includes/db.php";
 $villas = $pdo->query("SELECT * FROM villas ORDER BY statut = 'publie' DESC, nom")->fetchAll();
 include "includes/header.php";
@@ -28,7 +36,7 @@ include "includes/header.php";
                 <span class="public">Au public : <?= number_format($villa['prix_nuit'], 0, ',', ' ') ?> € / nuit</span>
               <?php endif; ?>
             </div>
-            <a href="#" class="btn">Gérer</a>
+            <a href="reservation-famille.php?villa=<?= (int) $villa['id'] ?>" class="btn">Réserver</a>
           </div>
         </article>
       <?php endforeach; ?>

@@ -32,7 +32,7 @@ function pourcentageRemboursement($dateArrivee) {
     }
     $jours = (int) $aujourdhui->diff($arrivee)->days;
     if ($jours > SEUIL_TOTAL)   return 100;
-    if ($jours >= SEUIL_PARTIEL) return 90;
+    if ($jours >= SEUIL_PARTIEL) return 80;
     return 0;
 }
 

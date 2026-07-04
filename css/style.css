@@ -362,6 +362,33 @@ main {
 .tabs-compte a:hover {
   color: var(--vert-vallee);
 }
+
+/* --- Planning famille : carte + calendrier côte à côte --- */
+.planning-main{ max-width:900px; margin:0 auto; }
+    .villa-row{
+      display:grid;
+      grid-template-columns: minmax(0, 1fr) 320px;  /* carte | calendrier fixe */
+      gap:16px;
+      align-items:start;
+      margin-bottom:24px;
+    }
+    .villa-row .creneaux-card{ max-width:none; margin:0; }
+    .calendrier-inline{ pointer-events:none; }
+    .calendrier-inline .flatpickr-calendar.inline{
+      box-shadow:none;
+      border:1px solid var(--gris-lin);
+      border-radius:12px;
+      margin:0;
+    }
+    .flatpickr-day.jour-occupe,
+    .flatpickr-day.jour-occupe:hover{
+      background:#EDE9E0; color:#b0aca1; text-decoration:line-through;
+    }
+    @media (max-width: 780px){
+      .villa-row{ grid-template-columns: 1fr; }
+      .calendrier-inline{ justify-self:start; }
+    }
+    
 /* --- Pied de page --- */
 .pied {
   background: var(--vert-vallee);

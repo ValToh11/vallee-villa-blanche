@@ -27,7 +27,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $dDepart    = DateTime::createFromFormat("Y-m-d", $depart);
     $aujourdhui = new DateTime("today");
 
-    // Validation des dates
     if (!$dArrivee || !$dDepart) {
         $erreurs[] = "Veuillez sélectionner vos dates de séjour.";
     } elseif ($dArrivee < $aujourdhui) {
@@ -36,7 +35,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $erreurs[] = "La date de départ doit être postérieure à la date d'arrivée.";
     }
 
-    // Validation des voyageurs
     if ($adultes < 1) {
         $erreurs[] = "Il faut au moins un adulte.";
     }
@@ -44,7 +42,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $erreurs[] = "Cette villa accueille au maximum $capacite voyageurs.";
     }
 
-    // Vérification de disponibilité : aucune réservation ne doit croiser ces dates
+    // Vérification de disponibilité (LA sécurité : le dernier mot revient au serveur)
     if (!$erreurs) {
         $check = $pdo->prepare(
             "SELECT COUNT(*) FROM reservations
@@ -53,7 +51,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                AND date_arrivee < ?
                AND date_depart > ?"
         );
-       
         $check->execute([
             $villa["id"],
             $dDepart->format("Y-m-d"),
@@ -64,7 +61,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         }
     }
 
-    // Tout est bon : on enregistre la réservation (prix recalculé côté serveur)
     if (!$erreurs) {
         $nbNuits   = (int) $dArrivee->diff($dDepart)->days;
         $prixTotal = $nbNuits * (float) $villa["prix_nuit"];
@@ -80,11 +76,27 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $nbNuits, $prixTotal, $adultes, $enfants,
         ]);
 
-        // On récupère l'id de la réservation créée et on redirige vers la confirmation
         $reservationId = $pdo->lastInsertId();
         header("Location: confirmation.php?id=" . $reservationId);
         exit;
     }
+}
+
+// ---- Dates déjà occupées, pour les griser dans le calendrier ----
+$reqOcc = $pdo->prepare(
+    "SELECT date_arrivee, date_depart FROM reservations
+     WHERE villa_id = ? AND statut IN ('en_attente','confirmee')"
+);
+$reqOcc->execute([$villa["id"]]);
+$occupees = $reqOcc->fetchAll();
+
+// On construit les plages à bloquer. Le jour de départ reste libre
+// (on peut arriver le jour où un autre séjour se termine), donc on va
+// de la date d'arrivée jusqu'au départ MOINS un jour.
+$plagesOccupees = [];
+foreach ($occupees as $o) {
+    $fin = (new DateTime($o["date_depart"]))->modify("-1 day")->format("Y-m-d");
+    $plagesOccupees[] = ["from" => $o["date_arrivee"], "to" => $fin];
 }
 
 include "includes/header.php";
@@ -144,6 +156,7 @@ include "includes/header.php";
   <script>
     const PRIX_NUIT = <?= (float) $villa["prix_nuit"] ?>;
     const CAPACITE  = <?= $capacite ?>;
+    const OCCUPEES  = <?= json_encode($plagesOccupees) ?>;   // dates déjà prises, transmises de PHP au JS
 
     flatpickr("#calendrier", {
       mode: "range",
@@ -153,6 +166,7 @@ include "includes/header.php";
       dateFormat: "Y-m-d",
       altInput: true,
       altFormat: "d/m/Y",
+      disable: OCCUPEES,          // Flatpickr grise ces plages
       onChange: function(dates) {
         if (dates.length === 2) {
           document.getElementById("date_arrivee").value = fmt(dates[0]);

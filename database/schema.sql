@@ -33,6 +33,16 @@ CREATE TABLE clients (
   date_creation DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 
+-- --- Table de la famille (accès intranet, sur code d'invitation) ---
+CREATE TABLE famille (
+  id            INT AUTO_INCREMENT PRIMARY KEY,
+  prenom        VARCHAR(80) NOT NULL,
+  nom           VARCHAR(80) NOT NULL,
+  email         VARCHAR(180) NOT NULL UNIQUE,
+  mot_de_passe  VARCHAR(255) NOT NULL,
+  date_creation DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+
 -- --- Table des réservations ---
 CREATE TABLE reservations (
   id              INT AUTO_INCREMENT PRIMARY KEY,
@@ -42,6 +52,8 @@ CREATE TABLE reservations (
   date_depart     DATE NOT NULL,
   nb_nuits        INT NOT NULL,
   prix_total      DECIMAL(8,2) NOT NULL,
+  nb_adultes      INT NOT NULL DEFAULT 1,
+  nb_enfants      INT NOT NULL DEFAULT 0,
   statut          ENUM('en_attente','confirmee','annulee') NOT NULL DEFAULT 'en_attente',
   statut_paiement ENUM('en_attente','paye','echoue') NOT NULL DEFAULT 'en_attente',
   date_creation   DATETIME DEFAULT CURRENT_TIMESTAMP,

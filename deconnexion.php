@@ -1,6 +1,5 @@
 <?php
 session_start();
-session_unset();      // vide les variables de session
-session_destroy();    // détruit la session
+unset($_SESSION["client_id"], $_SESSION["client_prenom"]);
 header("Location: index.php");
 exit;
